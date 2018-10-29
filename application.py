@@ -109,10 +109,6 @@ def save():
     if(new_desc == ''):
         new_desc = session['editdesc']
 
-   #message = str(session['editname']) + str(session['editfile'])+str(new_name)+str(new_desc)
-
-   # return redirect(url_for('error', desc=message,
-   #                     action_url=str.rstrip(request.url,'login')))
     my_file.update_object(session['editname'], session['editfile'], new_file, new_desc)
     return home()
 
@@ -210,7 +206,7 @@ def user_delete():
 
 
 
-@application.route('/glogin')
+@application.route('/glogin', methods=['POST'])
 def glogin():
     if session.get('logged_in'):
         return home() 
