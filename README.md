@@ -36,22 +36,19 @@ There is admin user login who has the previllage following previllage
  
  ### Feature List
  
- Users can perform the following activities on the portal \
+##### Users can perform the following activities on the portal 
 •	Register users \
 •	Upload file into S3 \
 •	Download Files from S3 via Cloud Front \
 •	Delete Files from S3 \
-•	Edit the already uploaded files to rename and change description. \
-
-Admins Users can perform the following activities on the portal \
+•	Edit the already uploaded files to rename and change description.
+##### Admins Users can perform the following activities on the portal 
 •	Upload file to S3 as regular users \
 •	Download Files from S3 via Cloud Front of any user \
 •	Delete Files on S3 of any user files \
 •	Edit the already uploaded files to rename and change description. \
-•	Delete the users itself. \
- 
- ### AWS components Leveraged
- 
+•	Delete any other users 
+ ### AWS components Leveraged 
 •	Used route-53 to forward the domain to the elastic beanstalk \
 •	Load Balancers are provisioned with 2min-4Max EC2 instances \
 •	Auto-scaling group provisioned to scale up on peak demand \
@@ -64,8 +61,7 @@ Admins Users can perform the following activities on the portal \
 •	Aurora RDS with multi-site disaster recovery and read replication \
 •	AWS Lambda function to monitor the file upload/download activity \
 •	Cloud watch to collect the lambda generated logs and monitor the EC2 instance health \
-•	SNS configured to send email to admin when the EC2 instance goes down below threshold. \ 
-
+•	SNS configured to send email to admin when the EC2 instance goes down below threshold.
  
  ### Deployment Instructions 
  
@@ -84,8 +80,7 @@ db_name     = <RD DB name where user table is created> \
 s3_bucket   = "S3 bucket" \
 e.	Run “python application.py” \
 f.	Open the web browser and access the webpage “http://127.0.0.1:5000/” to test the functionality \
-g.	Once everything is working we can use the following code pipeline to deploy/test and move to production automatically \
-
+g.	Once everything is working we can use the following code pipeline to deploy/test and move to production automatically
  
  ### Sample Screenshots
  #### Login
