@@ -37,7 +37,8 @@
             <td scope="col">File Description</td>
             <td scope="col">Upload Time</td>
             <td scope="col">Update Time</td>
-            <td scope="col">Select</td>
+            <td scope="col">Edit</td>
+            <td scope="col">Delete</td>
         </tr>
     </thead>
     <tbody>
@@ -53,6 +54,11 @@
                 <td class="item-name">{{file['desc']}}</td>
                 <td class="item-Time">{{file['add_time']}}</td>
                 <td class="item-Time">{{file['upd_time']}}</td>
+                <td class="item-name">
+                    <a href="/edit?{'username':'{{file['username']}}','filename':'{{file['filename']}}','filedesc':'{{file['desc']}}'}">
+                        Edit
+                </a>
+                </td>
                 <td class="item-delete">
                     <input type="radio" name="filename" id="file1" value="{{file['username']}}/{{file['filename']}}" />
                 </td>

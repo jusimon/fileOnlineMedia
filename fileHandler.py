@@ -79,26 +79,26 @@ class filehandler:
         
     def get_object(self, username, filename):
         my_bucket = self.s3.Bucket(self.bkt)
-        path = self.get_path(username)
-        key = path+filename
+        key = username+"/"+filename
         return self.client.get_object(Bucket=self.bkt, Key=key)['Body'].read()
 
+    def update_object(self, username, filename, new_file, new_desc):
+        self.add_file(username, new_file, new_desc, self.get_object(username, filename))
+        if(filename != new_file): 
+            key = username+"/"+filename
+            self.del_file(username, key)
 
 
 
-##
-##hdl  = filehandler()
-##
-##hdl.add_file('test', 'test2.txt','B File', 'MMMMMMMMMMMMMMMMMMMMMMMhihihihihih')
+
+#hdl  = filehandler()
+#
+#hdl.add_file('test', 'test2.txt','B File', 'My Test File')
+#rslt = hdl.list_files('test')
+#for dist in rslt:
+#        print (dist['filename'], dist['upd_time'], dist['add_time'], dist['desc'])
+#print ("NEXT")
+##hdl.update_object('test', 'test2.txt', 'test3.txt', 'TXT File')
 ##rslt = hdl.list_files('test')
 ##for dist in rslt:
 ##        print (dist['filename'], dist['upd_time'], dist['add_time'], dist['desc'])
-##
-##rslt = hdl.del_file('test', 'test/test2.txt')
-##print(rslt)
-##rslt = hdl.list_files('test')
-##for dist in rslt:
-##        print (dist['filename'], dist['upd_time'], dist['add_time'], dist['desc'])
-##
-
-

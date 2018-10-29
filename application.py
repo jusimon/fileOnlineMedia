@@ -74,7 +74,6 @@ def login():
 def download():
     my_file = filehandler()
     if request.method == 'GET':
-        #down_file = request.form['filename']
         base_url, infos = str(request.url).split("/download?")
         username  = ast.literal_eval(infos)['username']
         filename  = ast.literal_eval(infos)['filename']
@@ -83,6 +82,40 @@ def download():
                         mimetype='text/plain',
                         headers={"Content-Disposition": attach})
     return home()
+
+
+@application.route('/edit', methods=['GET'])
+def edit():
+    my_file = filehandler() 
+    base_url, infos = str(request.url).split("/edit?")
+    username  = ast.literal_eval(infos)['username']
+    filename  = ast.literal_eval(infos)['filename']
+    filedesc  = ast.literal_eval(infos)['filedesc']
+    session['editname']  = username 
+    session['editfile']  = filename
+    session['editdesc']  = filedesc
+    return render_template('edit.html', username=username, filename=filename, filedesc=filedesc)
+
+
+@application.route('/save', methods=['POST'])
+def save():
+    my_file = filehandler() 
+    new_file = request.form['filename']
+    new_desc = request.form['filedesc']
+
+    if(new_file == ''):
+        new_file = session['editfile']
+
+    if(new_desc == ''):
+        new_desc = session['editdesc']
+
+   #message = str(session['editname']) + str(session['editfile'])+str(new_name)+str(new_desc)
+
+   # return redirect(url_for('error', desc=message,
+   #                     action_url=str.rstrip(request.url,'login')))
+    my_file.update_object(session['editname'], session['editfile'], new_file, new_desc)
+    return home()
+
 
 
 @application.route('/delete', methods=['POST'])
