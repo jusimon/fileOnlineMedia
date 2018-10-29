@@ -36,9 +36,56 @@ There is admin user login who has the previllage following previllage
  
  ### Feature List
  
+ Users can perform the following activities on the portal \
+•	Register users \
+•	Upload file into S3 \
+•	Download Files from S3 via Cloud Front \
+•	Delete Files from S3 \
+•	Edit the already uploaded files to rename and change description. \
+
+Admins Users can perform the following activities on the portal \
+•	Upload file to S3 as regular users \
+•	Download Files from S3 via Cloud Front of any user \
+•	Delete Files on S3 of any user files \
+•	Edit the already uploaded files to rename and change description. \
+•	Delete the users itself. \
+ 
  ### AWS components Leveraged
  
+•	Used route-53 to forward the domain to the elastic beanstalk \
+•	Load Balancers are provisioned with 2min-4Max EC2 instances \
+•	Auto-scaling group provisioned to scale up on peak demand \
+•	EC2 instances with AMI are used for hosting the web-services APP. \
+•	S3 bucket has been used with web scale multi-site architecture \
+•	S3 Transfer Acceleration: S3 bucket is enabled with Transfer Acceleration to enable faster and secure transfer of files to S3. \
+•	S3 life cycle policy with 75 days policy to move to S3-1A  \
+•	Amazon Glacier used after 365 days archive \
+•	Cloud front delivery with S3 bucket has been provisioned with low TTL \
+•	Aurora RDS with multi-site disaster recovery and read replication \
+•	AWS Lambda function to monitor the file upload/download activity \
+•	Cloud watch to collect the lambda generated logs and monitor the EC2 instance health \
+•	SNS configured to send email to admin when the EC2 instance goes down below threshold. \ 
+
+ 
  ### Deployment Instructions 
+ 
+a.	Prerequisite Software: Python 3.6 development environment using Flask and Boto3 \
+b.	Download the application code from the github using git pull command \
+c.	Pip3 Install all the dependency given in the requirements.txt \
+d.	Provision your AWS environment using awscli and make sure following file has been created to have the right access \
+cat ~/.aws/config \
+[default] \
+output = json \
+region = us-west-1 \
+rds_host    = <your rdb_host url> \
+username    = <your rds admin user name > \
+password    = <your rds admin password > \
+db_name     = <RD DB name where user table is created> \
+s3_bucket   = "S3 bucket" \
+e.	Run “python application.py” \
+f.	Open the web browser and access the webpage “http://127.0.0.1:5000/” to test the functionality \
+g.	Once everything is working we can use the following code pipeline to deploy/test and move to production automatically \
+
  
  ### Sample Screenshots
  #### Login
