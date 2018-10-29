@@ -1,0 +1,81 @@
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+{% block body %}
+{% if error %}
+<p class=error><strong>Error:</strong> {{ error }}
+{% else %}
+
+<div class="app-title">
+    <h1>File Media List</h1>
+</div>
+<div>
+	<b>User :</b> {{ user['FirstName']}} {{ user['LastName']}}
+{% if user['userType'] %}
+<br>
+<a href="/admin">Admin</a>
+{% endif %}
+<span style="padding-left:800px;">
+	<a href="/logout">Logout</a></span>
+
+<hr>
+</div>
+<div>
+<form action="/upload" enctype="multipart/form-data" method="POST">
+	<b> Upload File :</b> 
+	
+    <input type="file" name="upload_file">
+    <input type="text" value="" placeholder="File Description" name="filedesc">
+    
+    <input class="upbtn" type="submit" type="button" value="Upload" >
+</form>
+    <hr>
+</div>
+<table>
+    <thead>
+        <tr>
+            <td scope="col">File Name</td>
+            <td scope="col">User Name</td>
+            <td scope="col">File Description</td>
+            <td scope="col">Upload Time</td>
+            <td scope="col">Update Time</td>
+            <td scope="col">Select</td>
+        </tr>
+    </thead>
+    <tbody>
+        <form name="delete" action="/delete" method="POST","GET">
+            {% for file in files %}
+            <tr>
+                <td class="item-name">
+                    <a href="/download?{'username':'{{file['username']}}','filename':'{{file['filename']}}'}">
+                    {{file['filename']}}
+                </a>
+                </td>
+                <td class="item-name">{{file['username']}}</td>
+                <td class="item-name">{{file['desc']}}</td>
+                <td class="item-Time">{{file['add_time']}}</td>
+                <td class="item-Time">{{file['upd_time']}}</td>
+                <td class="item-delete">
+                    <input type="radio" name="filename" id="file1" value="{{file['username']}}/{{file['filename']}}" />
+                </td>
+            </tr>
+            {% endfor %}
+	    <!-- <input type="submit" type="button" value="Delete" > -->
+        
+            <tr>
+            </tr>
+    </tbody>
+    <tfoot>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td colspan="6">
+			<input class="delbtn" type="submit" type="button" value="Delete" ></td> 
+	</tr>
+    </tfoot>
+    </form>
+</table> 
+<!--<input type="submit" type="button" value="Delete" >-->
+{% endif %}
+{% endblock %}

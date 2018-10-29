@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+{% block body %}
+{% if error %}
+<p class=error><strong>Error:</strong> {{ error }}
+{% else %}
+
+<div class="app-title">
+    <h1>File Media Users</h1>
+</div>
+
+User : {{ admin['FirstName']}} {{ admin['LastName']}}
+<br>
+<a href="/">Home</a> 
+<span style="padding-left:800px;">
+<a href="/logout">Logout</a>
+</span>
+<hr>
+
+
+<table>
+    <thead>
+        <tr>
+            <td scope="col">User Name</td>
+            <td scope="col">First Name</td>
+            <td scope="col">Last Name</td>
+            <td scope="col">Email</td>
+            <td scope="col">Select</td>
+        </tr>
+    </thead>
+    <tbody>
+        <form name="delete" action="/user_delete" method="POST">
+            {% for user in users %}
+            <tr>
+                <td class="item-name">{{user['username']}}</td>
+                <td class="item-name">{{user['FirstName']}}</td>
+                <td class="item-Time">{{user['LastName']}}</td>
+                <td class="item-Time">{{user['Email']}}</td>
+                <td class="item-delete">
+                    <input type="radio" name="username" id="usr1" value="{{user['username']}}"/>
+                </td>
+            </tr>
+            {% endfor %}
+	    <tfoot>
+            	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>
+			<input class="delbtn" type="submit" type="button" value="Delete" ></td>
+		</tr>
+	    </tfoot>
+        </form>
+            <tr>
+            </tr>
+    </tbody>
+</table> 
+
+{% endif %}
+{% endblock %}
