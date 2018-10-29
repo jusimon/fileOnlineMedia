@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+{% block body %}
+{% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+{% else %}
+ 
+
+<form action="/save" method="POST">
+    <div class="login">
+        <div class="login-screen">
+            <div class="app-title">
+                <h1>File Media Edit</h1>
+            </div>
+
+            <div class="login-form">
+                <div class="control-group">
+                    <input type="text" class="login-field" value="" placeholder='{{filename}}' name="filename">
+                    <label class="login-field-icon fui-user" for="login-name"></label>
+                </div>
+
+                <div class="control-group">
+                    <input type="text" class="login-field" value="" placeholder="{{filedesc}}" name="filedesc">
+                    <label class="login-field-icon fui-lock" for="login-pass"></label>
+                </div>
+
+                <input type="submit" value="Save" class="btn btn-primary btn-large btn-block" >
+                <br>
+            </div>
+        </div>
+    </div>
+</form>
+{% endif %}
+{% endblock %}
