@@ -38,14 +38,13 @@ def getAwsDbName():
 def getGoogleClientId():
     if (os.path.isfile(LOCAL_FILE)):
         ljson_data=open(LOCAL_FILE).read() 
-        print(json_data)
-        ljdata = ljson.loads(json_data) 
+        ljdata = json.loads(ljson_data) 
         return ljdata['g_client_id']
     return jdata['g_client_id']
 
 def getGoogleAccess():
     if (os.path.isfile(LOCAL_FILE)):
         ljson_data=open(LOCAL_FILE).read() 
-        data = ljson.loads(json_data) 
+        ljdata = json.loads(ljson_data) 
         return ljdata['g_secret_id']
     return jdata['g_secret_id']

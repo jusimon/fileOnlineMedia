@@ -14,8 +14,8 @@ class Auth:
 
     def get_google_auth(url, state=None, token=None):
 
-  #      redirect_uri=url+"gAuthCallback"
-        redirect_uri="https://filemediaonline.com/gAuthCallback"
+        redirect_uri=url+"gAuthCallback"
+  #      redirect_uri="https://filemediaonline.com/gAuthCallback"
         if token:
             return OAuth2Session(aws.getGoogleClientId(), token=token)
         if state:
