@@ -4,7 +4,7 @@ import json
 
 
 s3 = boto3.resource('s3')
-obj = s3.Object("elasticbeanstalk-us-west-1-687611171333","config.json")
+obj = s3.Object("elasticbeanstalk-us-west-1-505360751372","config.json")
 ret = obj.get()
 fdata =  (((ret)['Body']).read()).decode('utf-8')
 jdata = json.loads(fdata)
